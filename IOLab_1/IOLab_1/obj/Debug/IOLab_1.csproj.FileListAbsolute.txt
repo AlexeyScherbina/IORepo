@@ -1,1 +1,6 @@
 C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\bin\Debug\IOLab_1.exe.config
+C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\obj\Debug\IOLab_1.csprojResolveAssemblyReference.cache
+C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\obj\Debug\MainWindow.g.cs
+C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\obj\Debug\App.g.cs
+C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\obj\Debug\IOLab_1_MarkupCompile.cache
+C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\obj\Debug\IOLab_1_MarkupCompile.lref
