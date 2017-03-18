@@ -15,6 +15,29 @@ namespace IOLab_1
         double Func(double x);
         double Derivative(double x);
     }
+    public class Spasyonov : IFunction
+    {
+        public double Func(double x)
+        {
+            return Math.Pow((x*x-3*x+2),(0.3));
+        }
+        public double Derivative(double x)
+        {
+            return (2*x-3)/(3* Math.Pow((x * x - 3 * x + 2), (2 / 3)));
+        }
+    }
+    public class Scherbina : IFunction
+    {
+        public double Func(double x)
+        {
+            return Math.Pow(x-1, 2)* Math.Pow(x + 1, 4)* Math.Pow(x - 2, 3);
+        }
+        public double Derivative(double x)
+        {
+            return 4 * Math.Pow(x - 2,3) * Math.Pow(x - 1,2) * Math.Pow(x + 1,3) + Math.Pow(x - 2,3)
+                * Math.Pow(x + 1,4) * (2 * x - 2)+3 * Math.Pow(x - 2,2) * Math.Pow(x - 1,2) * Math.Pow(x + 1,4);
+        }
+    }
     public class Golden : IMethod
     {
         public double Solve(object[] args, IFunction f)

@@ -7,8 +7,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Button x:Name="buttonSolve" Content="Button" HorizontalAlignment="Left" Margin="321,114,0,0" VerticalAlignment="Top" Width="75"/>
-        <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="147" Margin="38,89,0,0" VerticalAlignment="Top" Width="179"/>
+        <Button x:Name="buttonSolve" Content="Решить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Margin="10,205,0,0" Click="buttonSolve_Click"/>
+        <Canvas x:Name="canvas" Margin="207,10,10,10" ClipToBounds="True"/>
+        <CheckBox x:Name="checkBoxGolden" Content="Золотое сечение" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True" Checked="checkBoxGolden_Checked"/>
+        <CheckBox x:Name="checkBoxCubic" Content="Кубическая аппроксимация" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Checked="checkBoxCubic_Checked"/>
+        <CheckBox x:Name="checkBox1" Content="(x^2-3*x+2)^1/3" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" IsChecked="True" Checked="checkBox1_Checked"/>
+        <CheckBox x:Name="checkBox2" Content="(x-1)^2 * (x+1)^4 * (x-2)^3" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Checked="checkBox2_Checked"/>
+        <TextBox x:Name="textBoxXmin" HorizontalAlignment="Left" Height="23" Margin="66,112,0,0" TextWrapping="Wrap" Text="-1" VerticalAlignment="Top" Width="40"/>
+        <TextBox x:Name="textBoxXmax" HorizontalAlignment="Left" Height="23" Margin="162,112,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="40"/>
+        <TextBox x:Name="textBoxYmin" HorizontalAlignment="Left" Height="23" Margin="66,140,0,0" TextWrapping="Wrap" Text="-1" VerticalAlignment="Top" Width="40"/>
+        <TextBox x:Name="textBoxYmax" HorizontalAlignment="Left" Height="23" Margin="162,140,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="40"/>
+        <Label x:Name="label" Content="Xmin:" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" Width="51"/>
+        <Label x:Name="label1" Content="Ymin:" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top" Width="51"/>
+        <Label x:Name="label2" Content="Xmax:" HorizontalAlignment="Left" Margin="111,112,0,0" VerticalAlignment="Top" Width="46"/>
+        <Label x:Name="label3" Content="Ymax:" HorizontalAlignment="Left" Margin="111,138,0,0" VerticalAlignment="Top" Width="46"/>
+        <TextBox x:Name="textBoxResult" HorizontalAlignment="Left" Height="78" Margin="10,232,0,0" TextWrapping="Wrap" Text="Результат." VerticalAlignment="Top" Width="192" IsReadOnly="True"/>
+        <TextBox x:Name="textBoxE" HorizontalAlignment="Left" Height="23" Margin="31,168,0,0" TextWrapping="Wrap" Text="0,01" VerticalAlignment="Top" Width="35"/>
+        <TextBox x:Name="textBoxE2" HorizontalAlignment="Left" Height="23" Margin="95,168,0,0" TextWrapping="Wrap" Text="0,01" VerticalAlignment="Top" Width="34" IsEnabled="False"/>
+        <TextBox x:Name="textBoxStep" HorizontalAlignment="Left" Height="23" Margin="162,168,0,0" TextWrapping="Wrap" Text="0,1" VerticalAlignment="Top" Width="40" IsEnabled="False"/>
+        <Label x:Name="label4" Content="E" HorizontalAlignment="Left" Margin="10,166,0,0" VerticalAlignment="Top" Width="21"/>
+        <Label x:Name="label5" Content="E2" HorizontalAlignment="Left" Margin="71,166,0,0" VerticalAlignment="Top" Width="24"/>
+        <Label x:Name="label6" Content="шаг" HorizontalAlignment="Left" Margin="129,166,0,0" VerticalAlignment="Top" Width="33"/>
 
     </Grid>
 </Window>

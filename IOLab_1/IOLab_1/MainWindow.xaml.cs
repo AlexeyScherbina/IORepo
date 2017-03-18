@@ -20,44 +20,111 @@ namespace IOLab_1
     /// </summary>
     public partial class MainWindow : Window
     {
-        double moveX = 0;
-        double moveY = 0;
+        IMethod m;
+        IFunction f;
         double width = 0;
         double height = 0;
         double YMax = 1;
         double YMin = -1;
-        double xMin = -1;
-        double xMax = 1;
+        double XMin = -1;
+        double XMax = 1;
         double xScale = 0;
         double yScale = 0;
         double x0 = 0;
         double y0 = 0;
-        List<double> realRoots;
 
         public MainWindow()
         {
             InitializeComponent();
+            m = new Golden();
+            f = new Spasyonov();
         }
-        void GraphicParams(double x)
+
+        private void checkBoxGolden_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                checkBoxCubic.IsChecked = false;
+                textBoxE2.IsEnabled = false;
+                textBoxStep.IsEnabled = false;
+            }
+            catch (Exception) { }
+            m = new Golden();
+        }
+
+        private void checkBoxCubic_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                checkBoxGolden.IsChecked = false;
+                textBoxE2.IsEnabled = true;
+                textBoxStep.IsEnabled = true;
+            }
+            catch (Exception) { }
+            m = new Cubic();
+        }
+
+        private void checkBox1_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                checkBox2.IsChecked = false;
+                textBoxXmin.Text = "-1";
+                textBoxXmax.Text = "2";
+            }
+            catch (Exception) { }
+
+            f = new Spasyonov();
+        }
+
+        private void checkBox2_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                checkBox1.IsChecked = false;
+                textBoxXmin.Text = "-0,5";
+                textBoxXmax.Text = "0,5";
+            }
+            catch (Exception) { }
+
+            f = new Scherbina();
+        }
+        void GraphicParams()
         {
             width = canvas.ActualWidth;
             height = canvas.ActualHeight;
-            try
-            {
-                YMax = double.Parse(textBoxYmax.Text) / slider.Value + moveY;
-            }
-            catch (Exception) { }
-            try
-            {
-                YMin = double.Parse(textBoxYmin.Text) / slider.Value + moveY;
-            }
-            catch (Exception) { }
-            xMin = -1 / slider.Value + moveX;
-            xMax = x / slider.Value + moveX;
-            xScale = width / (xMax - xMin);
+            double.TryParse(textBoxYmin.Text, out YMin);
+            double.TryParse(textBoxYmax.Text, out YMax);
+            double.TryParse(textBoxXmin.Text, out XMin);
+            double.TryParse(textBoxXmax.Text, out XMax);
+            xScale = width / (XMax - XMin);
             yScale = height / (YMax - YMin);
-            x0 = -xMin * xScale;
+            x0 = -XMin * xScale;
             y0 = YMax * yScale;
+        }
+
+        private void buttonSolve_Click(object sender, RoutedEventArgs e)
+        {
+            GraphicParams();
+            object[] o;
+            try
+            {
+                if (checkBoxGolden.IsChecked == true)
+                {
+                    o = new object[] { XMin, XMax, true, double.Parse(textBoxE.Text) };
+                }
+                else
+                {
+                    o = new object[] { XMin, double.Parse(textBoxStep.Text),
+                        double.Parse(textBoxE.Text), double.Parse(textBoxE2.Text) };
+                }
+                textBoxResult.Text = "Минимум функции: "
+                    + m.Solve(o, f);
+                DrawGraph();
+                DrawGraphic(f);
+                DrawRoot(m.Solve(o, f));
+            }
+            catch (Exception) { }
         }
         void AddLine(Brush stroke, double x1, double y1, double x2, double y2)
         {
@@ -78,17 +145,6 @@ namespace IOLab_1
         {
             canvas.Children.Clear();
             int margin = 0;
-            double a = 1;
-            if (test)
-            {
-                a = 1.5;
-            }
-            else
-            {
-                a = 1;
-            }
-            GraphicParams(a);
-
             canvas.Children.Add(new Rectangle()
             {
                 Width = width,
@@ -102,13 +158,13 @@ namespace IOLab_1
                 xStep *= 10;
             while (xStep * xScale > 250)
                 xStep /= 10;
-            for (double dx = xStep; dx <= xMax; dx += xStep)
+            for (double dx = xStep; dx <= XMax; dx += xStep)
             {
                 double x = x0 + dx * xScale;
                 AddLine(Brushes.LightGray, x + margin, 0, x + margin, height);
                 AddText(string.Format("{0:0.###}", dx), x + 1 + margin, y0 - 2);
             }
-            for (double dx = -xStep; dx >= xMin; dx -= xStep)
+            for (double dx = -xStep; dx >= XMin; dx -= xStep)
             {
                 double x = x0 + dx * xScale;
                 AddLine(Brushes.LightGray, x + margin, 0, x + margin, height);
@@ -137,7 +193,7 @@ namespace IOLab_1
                     AddText(string.Format("{0:0.###}", dy), x0 + 2 + margin, y - 2);
                 }
             }
-            if (xMin * xMax < 0)
+            if (XMin * XMax < 0)
             {
                 AddLine(Brushes.Black, x0 + margin, 0, x0 + margin, height);
                 AddText("Y", x0 - 10 + margin, 2);
@@ -169,7 +225,7 @@ namespace IOLab_1
             {
                 AddLine(Brushes.Black, 0 + margin, height, width + margin, height);
                 AddText("X", width - 10 + margin, height - 14);
-                for (double dx = xStep; dx <= xMax; dx += xStep)
+                for (double dx = xStep; dx <= XMax; dx += xStep)
                 {
                     double x = x0 + dx * xScale;
                     if (x > -1)
@@ -177,7 +233,7 @@ namespace IOLab_1
                         AddText(string.Format("{0:0.###}", dx), x + 1 + margin, height - 20);
                     }
                 }
-                for (double dx = -xStep; dx >= xMin; dx -= xStep)
+                for (double dx = -xStep; dx >= XMin; dx -= xStep)
                 {
                     double x = x0 + dx * xScale;
                     if (x > -1)
@@ -187,40 +243,25 @@ namespace IOLab_1
                 }
             }
             AddText("0", x0 + 1 + margin, y0 - 2);
-
         }
-
-        void DrawRoots()
+        void DrawRoot(double x)
         {
-            foreach (double x in realRoots)
+            canvas.Children.Add(new Ellipse()
             {
-                canvas.Children.Add(new Ellipse()
-                {
-                    Width = 6,
-                    Height = 6,
-                    Margin = new Thickness(x0 + x * xScale - 3, y0 - 3, 0, 0),
-                    Fill = Brushes.Black
-                });
-            }
+                Width = 6,
+                Height = 6,
+                Margin = new Thickness(x0 + x * xScale - 3, y0 - f.Func(x)*yScale- 3, 0, 0),
+                Fill = Brushes.Black
+            });
         }
-        void DrawGraphic(List<Solution> l, Color c, Function f)
+        void DrawGraphic(IFunction f)
         {
             int margin = 0;
-            double a = 1;
-            if (test)
-            {
-                a = 1.5;
-            }
-            else
-            {
-                a = 1;
-            }
-            GraphicParams(a);
             double e = double.Parse(textBoxE.Text);
-            if (e < 0.0001) e = 0.0001;
-            double x = -1 + e;
-            double y = f(x, int.Parse(comboBoxK.Text));
-            for (double i = -1 + e; i < a; i += e)
+            if (e < 0.01) e = 0.01;
+            double x = XMin;
+            double y = f.Func(x);
+            for (double i = XMin + e; i <= XMax; i += e)
             {
                 try
                 {
@@ -229,17 +270,15 @@ namespace IOLab_1
                         X1 = x0 + margin + x * xScale,
                         X2 = x0 + margin + i * xScale,
                         Y1 = y0 - y * yScale,
-                        Y2 = y0 - f(i, int.Parse(comboBoxK.Text)) * yScale,
+                        Y2 = y0 - f.Func(i) * yScale,
                         StrokeThickness = 2,
-                        Stroke = new SolidColorBrush(c)
+                        Stroke = new SolidColorBrush(Color.FromRgb(255, 0, 0))
                     });
                     x = i;
-                    y = f(i, int.Parse(comboBoxK.Text));
-
+                    y = f.Func(i);
                 }
                 catch (Exception) { }
             }
-            DrawRoots();
         }
     }
 }

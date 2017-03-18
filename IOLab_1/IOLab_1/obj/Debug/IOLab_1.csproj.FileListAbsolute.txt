@@ -4,3 +4,11 @@ C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\obj\Debug\MainWi
 C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\obj\Debug\App.g.cs
 C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\obj\Debug\IOLab_1_MarkupCompile.cache
 C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\obj\Debug\IOLab_1_MarkupCompile.lref
+C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\bin\Debug\IOLab_1.exe
+C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\bin\Debug\IOLab_1.pdb
+C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\obj\Debug\MainWindow.baml
+C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\obj\Debug\IOLab_1.g.resources
+C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\obj\Debug\IOLab_1.Properties.Resources.resources
+C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\obj\Debug\IOLab_1.csproj.GenerateResource.Cache
+C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\obj\Debug\IOLab_1.exe
+C:\Users\Алексей\Documents\GitHub\IORepo\IOLab_1\IOLab_1\obj\Debug\IOLab_1.pdb
