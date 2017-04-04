@@ -8,7 +8,7 @@ namespace IOLab_1
 {
     public interface IMethod
     {
-        double Solve(object[] args, IFunction f);
+        double Solve(object[] args, IFunction f, out double iter);
     }
     public interface IFunction
     {
@@ -19,7 +19,7 @@ namespace IOLab_1
     {
         public double Func(double x)
         {
-            return Math.Pow((x*x-3*x+2),(0.3));
+            return Math.Sign(x * x - 3 * x + 2) *Math.Pow(Math.Abs(x*x-3*x+2),(1.0/3));
         }
         public double Derivative(double x)
         {
@@ -40,8 +40,9 @@ namespace IOLab_1
     }
     public class Golden : IMethod
     {
-        public double Solve(object[] args, IFunction f)
+        public double Solve(object[] args, IFunction f, out double iter)
         {
+            iter = 0;
             double a = (double)args[0];
             double b = (double)args[1];
             bool is_min = (bool)args[2];
@@ -74,6 +75,7 @@ namespace IOLab_1
                     x2 = x1;
                     x1 = b - (b - a) / GS_proportion;
                 }
+                iter++;
             }
 
             return (a + b) / 2;
@@ -82,12 +84,13 @@ namespace IOLab_1
 
     public class Cubic : IMethod
     {
-        public double Solve(object[] args, IFunction f)
+        public double Solve(object[] args, IFunction f, out double iter)
         {
             double x0 = (double)args[0];
             double step = (double)args[1];
             double eps1 = (double)args[2];
             double eps2 = (double)args[3];
+            iter = 0;
             if (x0 > 0)
                 return double.NaN;
 
@@ -168,6 +171,7 @@ namespace IOLab_1
                     x_stationary = x2 - m * (x2 - x1);
                 if (m > 1)
                     x_stationary = x2;
+                iter++;
             }
 
             return x_stationary;

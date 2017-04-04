@@ -118,11 +118,15 @@ namespace IOLab_1
                     o = new object[] { XMin, double.Parse(textBoxStep.Text),
                         double.Parse(textBoxE.Text), double.Parse(textBoxE2.Text) };
                 }
+                double iter = 0;
                 textBoxResult.Text = "Минимум функции: "
-                    + m.Solve(o, f);
+                    + m.Solve(o, f, out iter);
                 DrawGraph();
                 DrawGraphic(f);
-                DrawRoot(m.Solve(o, f));
+                DrawRoot(m.Solve(o, f, out iter));
+                textBoxResult.AppendText("\n");
+                textBoxResult.AppendText("" + f.Func(m.Solve(o, f, out iter)));
+                textBoxResult.AppendText("\n Iter: " + iter);
             }
             catch (Exception) { }
         }
